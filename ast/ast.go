@@ -19,12 +19,12 @@ type Expression interface {
 	expressionNode()
 }
 
-// Program struct that represents our root node of every AST
+// Program struct that represents the root node of every AST
 type Program struct {
 	Statements []Statement
 }
 
-// TokenLiteral implements the statement interface
+// TokenLiteral implements the statement interface for Program
 func (p *Program) TokenLiteral() string {
 	if len(p.Statements) > 0 {
 		return p.Statements[0].TokenLiteral()
@@ -41,7 +41,7 @@ type LetStatement struct {
 
 func (ls *LetStatement) statementNode() {}
 
-// TokenLiteral implements Statement interface
+// TokenLiteral and statementNode implement Statement interface for LetStatement
 func (ls *LetStatement) TokenLiteral() string {
 	return ls.Token.Literal
 }
@@ -54,7 +54,7 @@ type Identifier struct {
 
 func (i *Identifier) expressionNode() {}
 
-// TokenLiteral implements Expression interface
+// TokenLiteral and expressionNode implement Expression interface for Identifier
 func (i *Identifier) TokenLiteral() string {
 	return i.Token.Literal
 }
