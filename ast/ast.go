@@ -132,3 +132,62 @@ func (es *ExpressionStatement) String() string {
 
 	return ""
 }
+
+// IntegerLiteral struct
+type IntegerLiteral struct {
+	Token token.Token
+	Value int64
+}
+
+func (il *IntegerLiteral) expressionNode() {}
+
+// TokenLiteral and expressionNode implement expression interface for IntegerLiteral
+func (il *IntegerLiteral) TokenLiteral() string { return il.Token.Literal }
+
+func (il *IntegerLiteral) String() string { return il.Token.Literal }
+
+// PrefixExpression struct
+type PrefixExpression struct {
+	Token    token.Token // the prefix token
+	Operator string
+	Right    Expression
+}
+
+func (pe *PrefixExpression) expressionNode() {}
+
+// TokenLiteral and expressionNode implement expression interface for PrefixExpression
+func (pe *PrefixExpression) TokenLiteral() string { return pe.Token.Literal }
+func (pe *PrefixExpression) String() string {
+	var out bytes.Buffer
+
+	out.WriteString("(")
+	out.WriteString(pe.Operator)
+	out.WriteString(pe.Right.String())
+	out.WriteString(")")
+
+	return out.String()
+}
+
+// InfixExpression struct
+type InfixExpression struct {
+	Token    token.Token // The operator token
+	Left     Expression
+	Operator string
+	Right    Expression
+}
+
+func (ie *InfixExpression) expressionNode() {}
+
+// TokenLiteral and expressionNode implement expression interface for InfixExpression
+func (ie *InfixExpression) TokenLiteral() string { return ie.Token.Literal }
+func (ie *InfixExpression) String() string {
+	var out bytes.Buffer
+
+	out.WriteString("(")
+	out.WriteString(ie.Left.String())
+	out.WriteString(" " + ie.Operator + " ")
+	out.WriteString(ie.Right.String())
+	out.WriteString(")")
+
+	return out.String()
+}
