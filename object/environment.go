@@ -1,0 +1,35 @@
+package object
+
+// NewEnclosedEnvironment function
+func NewEnclosedEnvironment(outer *Environment) *Environment {
+	env := NewEnvironment()
+	env.outer = outer
+	return env
+}
+
+// NewEnvironment function
+func NewEnvironment() *Environment {
+	s := make(map[string]Object)
+	return &Environment{store: s, outer: nil}
+}
+
+// Environment struct
+type Environment struct {
+	store map[string]Object
+	outer *Environment
+}
+
+// Get ter for environment
+func (e *Environment) Get(name string) (Object, bool) {
+	obj, ok := e.store[name]
+	if !ok && e.outer != nil {
+		obj, ok = e.outer.Get(name)
+	}
+	return obj, ok
+}
+
+// Set ter for environment
+func (e *Environment) Set(name string, val Object) Object {
+	e.store[name] = val
+	return val
+}
