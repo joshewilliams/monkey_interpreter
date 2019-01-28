@@ -15,8 +15,9 @@ const (
 
 	// Identifiers + literals
 
-	IDENT = "IDENT" // add, foobar, x, y, ...
-	INT   = "INT"   // 1343456
+	IDENT  = "IDENT" // add, foobar, x, y, ...
+	INT    = "INT"   // 1343456
+	STRING = "STRING"
 
 	// Operators
 
@@ -33,8 +34,6 @@ const (
 	EQ     = "=="
 	NOT_EQ = "!="
 
-	STRING = "STRING"
-
 	// Delimiters
 
 	COMMA     = ","
@@ -43,6 +42,8 @@ const (
 	RPAREN    = ")"
 	LBRACE    = "{"
 	RBRACE    = "}"
+	LBRACKET  = "["
+	RBRACKET  = "]"
 
 	// Keywords
 
